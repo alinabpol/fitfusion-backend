@@ -31,3 +31,17 @@ def get_one_recipe(id):
     ), 200
 
 
+@nutrition.route('/', methods=['POST'])
+
+def create_recipe():
+    payload = request.get_json()
+    print(payload)
+    new_recipe = models.Nutrition.create(title=payload['title'], description=payload['description'], time=payload['time'])
+    print(new_recipe) # just prints the ID -- check sqlite3 to see the data 
+
+    nutrition_dict = model_to_dict(new_recipe)
+    return jsonify(
+        data=nutrition_dict,
+        message="Sucessfully created a recipe!",
+        status=201
+    ), 201

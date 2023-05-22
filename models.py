@@ -4,7 +4,7 @@ DATABASE = SqliteDatabase('nutrition.sqlite')
 
 
 class Nutrition(Model):
-    name = CharField()
+    title = CharField()
     description = CharField()
     time = TimeField()
 
