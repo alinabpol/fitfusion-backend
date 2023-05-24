@@ -12,8 +12,6 @@ class Nutrition(Model):
         database = DATABASE
 
 
-
-
 def initialize():
     DATABASE.connect()
     DATABASE.create_tables([Nutrition], safe=True)

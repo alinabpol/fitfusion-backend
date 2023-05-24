@@ -5,7 +5,7 @@ from playhouse.shortcuts import model_to_dict
 
 nutrition = Blueprint('nutrition', 'recipe')
 
-
+# GET all route
 @nutrition.route('/', methods=['GET'])
 def nutrition_index():
     result = models.Nutrition.select()
@@ -20,6 +20,7 @@ def nutrition_index():
         'status': 200
     }), 200
 
+# GET route
 @nutrition.route('/<id>', methods=['GET'])
 def get_one_recipe(id):
     recipe = models.Nutrition.get_by_id(id)
@@ -31,6 +32,7 @@ def get_one_recipe(id):
     ), 200
 
 
+# POST route
 @nutrition.route('/', methods=['POST'])
 
 def create_recipe():
@@ -45,3 +47,17 @@ def create_recipe():
         message="Sucessfully created a recipe!",
         status=201
     ), 201
+
+# PUT route
+@nutrition.route('/<id>', methods=['PUT'])
+def update_recipe(id):
+    payload = request.get_json()
+    print(payload)
+    
+    models.Nutrition.update(**payload).where(models.Nutrition.id == id).execute()
+
+    return jsonify(
+        data=model_to_dict(models.Nutrition.get_by_id(id)), # same as lines 107, 108 
+        message="Recipe has been successfully updated!",
+        status=200
+    ),200
