@@ -61,3 +61,18 @@ def update_recipe(id):
         message="Recipe has been successfully updated!",
         status=200
     ),200
+
+
+# DELETE route
+@nutrition.route('/<id>', methods=['DELETE'])
+def delete_recipe(id):
+
+    delete_query = models.Nutrition.delete().where(models.Nutrition.id == id)
+    nums_of_rows_deleted = delete_query.execute()
+    print(nums_of_rows_deleted)
+
+    return jsonify(
+        data={},
+        message=f"Successfully deleted {nums_of_rows_deleted} dog with id {id}",
+        status=200
+    ), 200
