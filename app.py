@@ -9,6 +9,8 @@ import models
 
 from resources.nutrition import nutrition
 
+from resources.analytics_form import analytics_form
+
 app = Flask(__name__)
 
 @app.before_request
@@ -26,6 +28,7 @@ def after_request(response):
 
 CORS(nutrition, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(nutrition, url_prefix='/api/v1/nutrition')
+app.register_blueprint(analytics_form, url_prefix='/api/v1/form')
 
 
 
