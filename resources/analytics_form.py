@@ -38,7 +38,7 @@ def get_one_form(id):
 def create_form():
     payload = request.get_json()
     print(payload)
-    new_form = models.Analytics.create(title=payload['title'], description=payload['description'], time=payload['time'])
+    new_form = models.Analytics.create(activity=payload['activity'], time=payload['time'])
     print(new_form) # just prints the ID -- check sqlite3 to see the data 
 
     form_dict = model_to_dict(new_form)
