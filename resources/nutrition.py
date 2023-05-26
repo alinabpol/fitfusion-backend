@@ -57,7 +57,7 @@ def update_recipe(id):
     models.Nutrition.update(**payload).where(models.Nutrition.id == id).execute()
 
     return jsonify(
-        data=model_to_dict(models.Nutrition.get_by_id(id)), # same as lines 107, 108 
+        data=model_to_dict(models.Nutrition.get_by_id(id)),
         message="Recipe has been successfully updated!",
         status=200
     ),200
@@ -73,6 +73,6 @@ def delete_recipe(id):
 
     return jsonify(
         data={},
-        message=f"Successfully deleted {nums_of_rows_deleted} dog with id {id}",
+        message=f"Successfully deleted {nums_of_rows_deleted} recipe with id {id}",
         status=200
     ), 200
