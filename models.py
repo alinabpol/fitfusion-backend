@@ -18,9 +18,17 @@ class Analytics(Model):
     class Meta:
         database = DATABASE
 
+class Workout(Model):
+    activity = CharField()
+    time = TimeField()
+    calories = IntegerField()
+
+    class Meta:
+        database = DATABASE
+
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Nutrition, Analytics], safe=True)
+    DATABASE.create_tables([Nutrition, Analytics, Workout], safe=True)
     print("TABLES Created")
     DATABASE.close()
