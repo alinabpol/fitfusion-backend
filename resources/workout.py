@@ -38,7 +38,7 @@ def get_one_workout(id):
 def create_training():
     payload = request.get_json()
     print(payload)
-    new_workout = models.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'])
+    new_workout = models.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'], link=payload['link'])
     print(new_workout) 
 
     workout_dict = model_to_dict(new_workout)
