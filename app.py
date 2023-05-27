@@ -27,6 +27,9 @@ def after_request(response):
 
 
 CORS(nutrition, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(analytics_form, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(workout, origins=['http://localhost:3000'], supports_credentials=True)
+
 app.register_blueprint(nutrition, url_prefix='/api/v1/nutrition')
 app.register_blueprint(analytics_form, url_prefix='/api/v1/form')
 app.register_blueprint(workout, url_prefix='/api/v1/workout')

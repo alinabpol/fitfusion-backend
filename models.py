@@ -1,6 +1,8 @@
 from peewee import *
 
 DATABASE = SqliteDatabase('nutrition.sqlite')
+DATABASE = SqliteDatabase('analytics.sqlite')
+DATABASE = SqliteDatabase('workout.sqlite')
 
 
 class Nutrition(Model):
