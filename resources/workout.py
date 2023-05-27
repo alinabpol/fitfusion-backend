@@ -3,7 +3,7 @@ import models
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
 
-workout = Blueprint('workout', 'training')
+workout = Blueprint('workout', 'workout')
 
 # GET all route
 @workout.route('/', methods=['GET'])
@@ -12,21 +12,21 @@ def workout_index():
     print('result of workout select query')
     print(result)
 
-    nutrition_dicts = [model_to_dict(training) for training in result]
+    workout_dicts = [model_to_dict(training) for training in result]
     
     return jsonify({
-        'data': nutrition_dicts,
-        'message': f"Successfully found {len(nutrition_dicts)} workouts",
+        'data': workout_dicts,
+        'message': f"Successfully found {len(workout_dicts)} workouts",
         'status': 200
     }), 200
 
 # GET route
 @workout.route('/<id>', methods=['GET'])
-def get_one_recipe(id):
-    training = models.Workout.get_by_id(id)
-    print(training)
+def get_one_workout(id):
+    workout = models.Workout.get_by_id(id)
+    print(workout)
     return jsonify(
-        data=model_to_dict(training),
+        data=model_to_dict(workout),
         message="Success!!!",
         status=200
     ), 200
@@ -38,10 +38,10 @@ def get_one_recipe(id):
 def create_training():
     payload = request.get_json()
     print(payload)
-    new_training = models.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'])
-    print(new_training) # just prints the ID -- check sqlite3 to see the data 
+    new_workout = models.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'])
+    print(new_workout) 
 
-    workout_dict = model_to_dict(new_training)
+    workout_dict = model_to_dict(new_workout)
     return jsonify(
         data=workout_dict,
         message="Sucessfully created a workout!",
@@ -50,7 +50,7 @@ def create_training():
 
 # PUT route
 @workout.route('/<id>', methods=['PUT'])
-def update_training(id):
+def update_workout(id):
     payload = request.get_json()
     print(payload)
     
