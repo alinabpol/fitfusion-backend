@@ -1,14 +1,62 @@
 from peewee import *
 
-DATABASE = SqliteDatabase('nutrition.sqlite')
+DATABASE = SqliteDatabase('breakfast.sqlite')
+DATABASE = SqliteDatabase('lunch.sqlite')
+DATABASE = SqliteDatabase('dinner.sqlite')
+DATABASE = SqliteDatabase('snacks.sqlite')
+DATABASE = SqliteDatabase('smoothies.sqlite')
+DATABASE = SqliteDatabase('desserts.sqlite')
 DATABASE = SqliteDatabase('analytics.sqlite')
 DATABASE = SqliteDatabase('workout.sqlite')
 
 
-class Nutrition(Model):
+
+class Breakfast(Model):
     title = CharField()
-    description = CharField()
+    img = CharField()
     time = TimeField()
+    details = CharField()
+
+    class Meta:
+        database = DATABASE
+
+class Lunch(Model):
+    title = CharField()
+    img = CharField()
+    time = TimeField()
+    details = CharField()
+
+    class Meta:
+        database = DATABASE
+
+class Dinner(Model):
+    title = CharField()
+    img = CharField()
+    details = CharField()
+
+    class Meta:
+        database = DATABASE
+
+class Desserts(Model):
+    title = CharField()
+    img = CharField()
+    details = CharField()
+
+    class Meta:
+        database = DATABASE
+
+class Snacks(Model):
+    title = CharField()
+    img = CharField()
+    details = CharField()
+
+    class Meta:
+        database = DATABASE
+
+class Smoothies(Model):
+    title = CharField()
+    img = CharField()
+    details = CharField()
 
     class Meta:
         database = DATABASE
@@ -32,6 +80,6 @@ class Workout(Model):
 
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([Nutrition, Analytics, Workout], safe=True)
+    DATABASE.create_tables([ Analytics, Workout, Breakfast, Lunch, Dinner, Snacks, Smoothies, Desserts], safe=True)
     print("TABLES Created")
     DATABASE.close()
