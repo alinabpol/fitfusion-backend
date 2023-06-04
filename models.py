@@ -1,21 +1,22 @@
 from peewee import *
 
-DATABASE = SqliteDatabase('breakfast.sqlite')
+DATABASE = SqliteDatabase('workout.sqlite')
+DATABASE = SqliteDatabase('analytics.sqlite')
 DATABASE = SqliteDatabase('lunch.sqlite')
 DATABASE = SqliteDatabase('dinner.sqlite')
 DATABASE = SqliteDatabase('snacks.sqlite')
 DATABASE = SqliteDatabase('smoothies.sqlite')
 DATABASE = SqliteDatabase('desserts.sqlite')
-DATABASE = SqliteDatabase('analytics.sqlite')
-DATABASE = SqliteDatabase('workout.sqlite')
+DATABASE = SqliteDatabase('breakfast.sqlite')
 
 
 
 class Breakfast(Model):
     title = CharField()
     img = CharField()
-    time = TimeField()
-    details = CharField()
+    time = IntegerField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -24,7 +25,8 @@ class Lunch(Model):
     title = CharField()
     img = CharField()
     time = IntegerField()
-    details = CharField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -33,7 +35,8 @@ class Dinner(Model):
     title = CharField()
     img = CharField()
     time = IntegerField()
-    details = CharField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -42,7 +45,8 @@ class Desserts(Model):
     title = CharField()
     img = CharField()
     time = IntegerField()
-    details = CharField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -50,7 +54,8 @@ class Desserts(Model):
 class Snacks(Model):
     title = CharField()
     img = CharField()
-    details = CharField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -59,7 +64,8 @@ class Smoothies(Model):
     title = CharField()
     img = CharField()
     time = IntegerField()
-    details = CharField()
+    ingredients = IntegerField()
+    description = CharField()
 
     class Meta:
         database = DATABASE
