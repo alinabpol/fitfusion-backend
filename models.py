@@ -23,7 +23,7 @@ class Breakfast(Model):
 class Lunch(Model):
     title = CharField()
     img = CharField()
-    time = TimeField()
+    time = IntegerField()
     details = CharField()
 
     class Meta:
@@ -32,6 +32,7 @@ class Lunch(Model):
 class Dinner(Model):
     title = CharField()
     img = CharField()
+    time = IntegerField()
     details = CharField()
 
     class Meta:
@@ -40,6 +41,7 @@ class Dinner(Model):
 class Desserts(Model):
     title = CharField()
     img = CharField()
+    time = IntegerField()
     details = CharField()
 
     class Meta:
@@ -56,6 +58,7 @@ class Snacks(Model):
 class Smoothies(Model):
     title = CharField()
     img = CharField()
+    time = IntegerField()
     details = CharField()
 
     class Meta:
