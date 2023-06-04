@@ -38,7 +38,7 @@ def get_one_recipe(id):
 def create_recipe():
     payload = request.get_json()
     print(payload)
-    new_recipe = models.Breakfast.create(title=payload['title'], img=payload['image'], description=payload['description'])
+    new_recipe = models.Breakfast.create(title=payload['title'], img=payload['image'], time=payload["time"], description=payload['description'])
     print(new_recipe) # just prints the ID -- check sqlite3 to see the data 
 
     nutrition_dict = model_to_dict(new_recipe)
