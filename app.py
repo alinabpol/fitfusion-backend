@@ -1,15 +1,16 @@
-
+import os
 from flask import Flask, g
 from flask_cors import CORS
 import pymongo
 
 from pymongo import MongoClient
-
+from dotenv import load_dotenv
+load_dotenv()
 
 DEBUG = True
 PORT = 8000
 
-connection_url = 'mongodb+srv://admin:abcd1234@sei.cfwutib.mongodb.net/fitfusion?retryWrites=true&w=majority'
+connection_url = os.getenv("ATLAS_URI")
 app = Flask(__name__)
 client = pymongo.MongoClient(connection_url)
 

@@ -1,8 +1,10 @@
 from pymongo import MongoClient
 from bson import ObjectId
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-
-client= MongoClient('mongodb+srv://admin:abcd1234@sei.cfwutib.mongodb.net/fitfusion?retryWrites=true&w=majority')
+client= os.getenv("ATLAS_URI")
 db = client['fitfusion']
 collection = db['breakfast']
 
