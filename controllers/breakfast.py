@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
-from models import Breakfast
+from models.breakfast_model import Breakfast
+from bson import ObjectId
 
 breakfast = Blueprint('breakfast', 'breakfast')
 

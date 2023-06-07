@@ -1,4 +1,4 @@
-import models
+import models.breakfast_model as breakfast_model
 
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
@@ -8,7 +8,7 @@ workout = Blueprint('workout', 'workout')
 # GET all route
 @workout.route('/', methods=['GET'])
 def workout_index():
-    result = models.Workout.select()
+    result = breakfast_model.Workout.select()
     print('result of workout select query')
     print(result)
 
@@ -23,7 +23,7 @@ def workout_index():
 # GET route
 @workout.route('/<id>', methods=['GET'])
 def get_one_workout(id):
-    workout = models.Workout.get_by_id(id)
+    workout = breakfast_model.Workout.get_by_id(id)
     print(workout)
     return jsonify(
         data=model_to_dict(workout),
@@ -38,7 +38,7 @@ def get_one_workout(id):
 def create_training():
     payload = request.get_json()
     print(payload)
-    new_workout = models.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'], link=payload['link'])
+    new_workout = breakfast_model.Workout.create(activity=payload['activity'], time=payload['time'], calories=payload['calories'], link=payload['link'])
     print(new_workout) 
 
     workout_dict = model_to_dict(new_workout)
@@ -54,10 +54,10 @@ def update_workout(id):
     payload = request.get_json()
     print(payload)
     
-    models.Workout.update(**payload).where(models.Workout.id == id).execute()
+    breakfast_model.Workout.update(**payload).where(breakfast_model.Workout.id == id).execute()
 
     return jsonify(
-        data=model_to_dict(models.Workout.get_by_id(id)),
+        data=model_to_dict(breakfast_model.Workout.get_by_id(id)),
         message="Workout has been successfully updated!",
         status=200
     ),200
@@ -67,7 +67,7 @@ def update_workout(id):
 @workout.route('/<id>', methods=['DELETE'])
 def delete_workout(id):
 
-    delete_query = models.Workout.delete().where(models.Workout.id == id)
+    delete_query = breakfast_model.Workout.delete().where(breakfast_model.Workout.id == id)
     nums_of_rows_deleted = delete_query.execute()
     print(nums_of_rows_deleted)
 

@@ -1,4 +1,4 @@
-import models
+import models.breakfast_model as breakfast_model
 
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
@@ -8,7 +8,7 @@ analytics_form = Blueprint('analytics_form', 'form')
 # GET all route
 @analytics_form.route('/', methods=['GET'])
 def form_index():
-    result = models.Analytics.select()
+    result = breakfast_model.Analytics.select()
     print('result of analytics_form select query')
     print(result)
 
@@ -23,7 +23,7 @@ def form_index():
 # GET route
 @analytics_form.route('/<id>', methods=['GET'])
 def get_one_form(id):
-    form = models.Analytics.get_by_id(id)
+    form = breakfast_model.Analytics.get_by_id(id)
     print(form)
     return jsonify(
         data=model_to_dict(form),
@@ -38,7 +38,7 @@ def get_one_form(id):
 def create_form():
     payload = request.get_json()
     print(payload)
-    new_form = models.Analytics.create(activity=payload['activity'], time=payload['time'])
+    new_form = breakfast_model.Analytics.create(activity=payload['activity'], time=payload['time'])
     print(new_form) # just prints the ID -- check sqlite3 to see the data 
 
     form_dict = model_to_dict(new_form)
@@ -54,10 +54,10 @@ def update_form(id):
     payload = request.get_json()
     print(payload)
     
-    models.Analytics.update(**payload).where(models.Analytics.id == id).execute()
+    breakfast_model.Analytics.update(**payload).where(breakfast_model.Analytics.id == id).execute()
 
     return jsonify(
-        data=model_to_dict(models.Analytics.get_by_id(id)),
+        data=model_to_dict(breakfast_model.Analytics.get_by_id(id)),
         message="Form has been successfully updated!",
         status=200
     ),200
@@ -67,7 +67,7 @@ def update_form(id):
 @analytics_form.route('/<id>', methods=['DELETE'])
 def delete_form(id):
 
-    delete_query = models.Analytics.delete().where(models.Analytics.id == id)
+    delete_query = breakfast_model.Analytics.delete().where(breakfast_model.Analytics.id == id)
     nums_of_rows_deleted = delete_query.execute()
     print(nums_of_rows_deleted)
 

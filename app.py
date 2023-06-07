@@ -3,7 +3,7 @@ import os
 
 from flask import Flask, g
 from flask_cors import CORS
-import pymongo
+from pymongo import MongoClient
 
 from dotenv import load_dotenv
 
@@ -17,14 +17,14 @@ PORT = 8000
 
 app = Flask(__name__)
 connection_url = os.getenv("ATLAS_URI")
-client = pymongo.MongoClient(connection_url)
+client = MongoClient(connection_url)
 db = client['fitfusion']
 
 
 
-import models
+import models.breakfast_model as breakfast_model
 
-from resources.breakfast import breakfast
+from controllers.breakfast import breakfast
 # from resources.lunch import lunch
 # from resources.dinner import dinner
 # from resources.snacks import snacks
@@ -72,7 +72,7 @@ app.register_blueprint(breakfast, url_prefix='/api/v1/breakfast')
 
 
 if __name__ == '__main__':
-    models.initialize()
+    breakfast_model.initialize()
     print('tables connected')
     app.run(debug=DEBUG, port=PORT)
 

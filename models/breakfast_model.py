@@ -32,6 +32,7 @@ class Breakfast:
     @staticmethod
     def get_all():
         result = collection.find()
+        print(result)
         return list(result)
 
     @staticmethod
@@ -42,12 +43,14 @@ class Breakfast:
 
     @staticmethod
     def update(id, data):
-        result = collection.update_one({'_id': id}, {'$set': data})
+        result = collection.update_one({'_id': ObjectId(id)}, {'$set': data})
+        print(result.modified_count)
         return result.modified_count
 
     @staticmethod
     def delete(id):
-        result = collection.delete_one({'_id': id})
+        result = collection.delete_one({'_id': ObjectId(id)})
+        print(result.deleted_count)
         return result.deleted_count
 
 

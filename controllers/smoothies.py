@@ -1,4 +1,4 @@
-import models
+import models.breakfast_model as breakfast_model
 
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
@@ -8,7 +8,7 @@ smoothies = Blueprint('smoothies', 'smoothies')
 # GET all route
 @smoothies.route('/', methods=['GET'])
 def nutrition_index():
-    result = models.Smoothies.select()
+    result = breakfast_model.Smoothies.select()
     print('result of nutrition select query')
     print(result)
 
@@ -23,7 +23,7 @@ def nutrition_index():
 # GET route
 @smoothies.route('/<id>', methods=['GET'])
 def get_one_recipe(id):
-    recipe = models.Smoothies.get_by_id(id)
+    recipe = breakfast_model.Smoothies.get_by_id(id)
     print(recipe)
     return jsonify(
         data=model_to_dict(recipe),
@@ -38,7 +38,7 @@ def get_one_recipe(id):
 def create_recipe():
     payload = request.get_json()
     print(payload)
-    new_recipe = models.Smoothies.create(title=payload['title'], img=payload['img'], time=payload["time"], ingredients=payload["ingredients"], description=payload['description'])
+    new_recipe = breakfast_model.Smoothies.create(title=payload['title'], img=payload['img'], time=payload["time"], ingredients=payload["ingredients"], description=payload['description'])
     print(new_recipe) # just prints the ID -- check sqlite3 to see the data 
 
     nutrition_dict = model_to_dict(new_recipe)
@@ -54,10 +54,10 @@ def update_recipe(id):
     payload = request.get_json()
     print(payload)
     
-    models.Smoothies.update(**payload).where(models.Smoothies.id == id).execute()
+    breakfast_model.Smoothies.update(**payload).where(breakfast_model.Smoothies.id == id).execute()
 
     return jsonify(
-        data=model_to_dict(models.Smoothies.get_by_id(id)),
+        data=model_to_dict(breakfast_model.Smoothies.get_by_id(id)),
         message="Recipe has been successfully updated!",
         status=200
     ),200
@@ -67,7 +67,7 @@ def update_recipe(id):
 @smoothies.route('/<id>', methods=['DELETE'])
 def delete_recipe(id):
 
-    delete_query = models.Smoothies.delete().where(models.Smoothies.id == id)
+    delete_query = breakfast_model.Smoothies.delete().where(breakfast_model.Smoothies.id == id)
     nums_of_rows_deleted = delete_query.execute()
     print(nums_of_rows_deleted)
 

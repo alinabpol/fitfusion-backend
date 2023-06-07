@@ -1,4 +1,4 @@
-import models
+import models.breakfast_model as breakfast_model
 
 from flask import Blueprint, jsonify, request
 from playhouse.shortcuts import model_to_dict
@@ -8,7 +8,7 @@ desserts = Blueprint('desserts', 'desserts')
 # GET all route
 @desserts.route('/', methods=['GET'])
 def nutrition_index():
-    result = models.Desserts.select()
+    result = breakfast_model.Desserts.select()
     print('result of nutrition select query')
     print(result)
 
@@ -23,7 +23,7 @@ def nutrition_index():
 # GET route
 @desserts.route('/<id>', methods=['GET'])
 def get_one_recipe(id):
-    recipe = models.Desserts.get_by_id(id)
+    recipe = breakfast_model.Desserts.get_by_id(id)
     print(recipe)
     return jsonify(
         data=model_to_dict(recipe),
@@ -38,7 +38,7 @@ def get_one_recipe(id):
 def create_recipe():
     payload = request.get_json()
     print(payload)
-    new_recipe = models.Desserts.create(title=payload['title'], img=payload['img'], time=payload["time"], ingredients=payload["ingredients"], description=payload['description'])
+    new_recipe = breakfast_model.Desserts.create(title=payload['title'], img=payload['img'], time=payload["time"], ingredients=payload["ingredients"], description=payload['description'])
     print(new_recipe) # just prints the ID -- check sqlite3 to see the data 
 
     nutrition_dict = model_to_dict(new_recipe)
@@ -54,10 +54,10 @@ def update_recipe(id):
     payload = request.get_json()
     print(payload)
     
-    models.Desserts.update(**payload).where(models.Desserts.id == id).execute()
+    breakfast_model.Desserts.update(**payload).where(breakfast_model.Desserts.id == id).execute()
 
     return jsonify(
-        data=model_to_dict(models.Desserts.get_by_id(id)),
+        data=model_to_dict(breakfast_model.Desserts.get_by_id(id)),
         message="Recipe has been successfully updated!",
         status=200
     ),200
@@ -67,7 +67,7 @@ def update_recipe(id):
 @desserts.route('/<id>', methods=['DELETE'])
 def delete_recipe(id):
 
-    delete_query = models.Desserts.delete().where(models.Desserts.id == id)
+    delete_query = breakfast_model.Desserts.delete().where(breakfast_model.Desserts.id == id)
     nums_of_rows_deleted = delete_query.execute()
     print(nums_of_rows_deleted)
 
