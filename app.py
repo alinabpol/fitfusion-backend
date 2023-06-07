@@ -1,10 +1,12 @@
 
 import os
+
 from flask import Flask, g
 from flask_cors import CORS
 import pymongo
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -14,7 +16,10 @@ PORT = 8000
 
 
 app = Flask(__name__)
-client = os.getenv("ATLAS_URI")
+connection_url = os.getenv("ATLAS_URI")
+client = pymongo.MongoClient(connection_url)
+db = client['fitfusion']
+
 
 
 import models
@@ -31,16 +36,16 @@ from resources.breakfast import breakfast
 
 app = Flask(__name__)
 
+
 @app.before_request
 def before_request():
     """Connect to the database before each request"""
-    g.db = models.DATABASE
-    g.db.connect()
+    g.db_mongo = client.get_database('fitfusion')
 
 @app.after_request
 def after_request(response):
     """Close the database connection after each request"""
-    g.db.close()
+    db.client.close()
     return response
 
 
@@ -67,8 +72,8 @@ app.register_blueprint(breakfast, url_prefix='/api/v1/breakfast')
 
 
 if __name__ == '__main__':
-    print('tables connected')
     models.initialize()
+    print('tables connected')
     app.run(debug=DEBUG, port=PORT)
 
 

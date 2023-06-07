@@ -7,12 +7,15 @@ breakfast = Blueprint('breakfast', 'breakfast')
 @breakfast.route('/', methods=['GET'])
 def nutrition_index():
     breakfasts = Breakfast.get_all()
-
-    nutrition_dicts = [breakfast.__dict__ for breakfast in breakfasts]
+    print(breakfasts)
+    object_id_to_str = []
+    for breakfast in breakfasts:
+        breakfast['_id'] = str(breakfast['_id'])  
+        object_id_to_str.append(breakfast)
 
     return jsonify({
-        'data': nutrition_dicts,
-        'message': f"Successfully found {len(nutrition_dicts)} recipes",
+        'data': object_id_to_str,
+        'message': f"Successfully found {len(object_id_to_str)} recipes",
         'status': 200
     }), 200
 

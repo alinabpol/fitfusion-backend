@@ -4,7 +4,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-client= os.getenv("ATLAS_URI")
+
+
+client = MongoClient(os.getenv("ATLAS_URI"))
 db = client['fitfusion']
 collection = db['breakfast']
 
