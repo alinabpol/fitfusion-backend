@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, request
 from models.analytics_model import Analytics, collection
-from bson import ObjectId
-
+from bson.objectid import ObjectId
 
 analytics = Blueprint('analytics', 'analytics')
 

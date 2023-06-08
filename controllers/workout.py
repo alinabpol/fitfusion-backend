@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from models.workout_model import Workout, collection
-from bson import ObjectId
+from bson.objectid import ObjectId
 
 
 workout = Blueprint('workout', 'workout')

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from models.nutrition_models import Lunch, lunch_collection
-from bson import ObjectId
+from bson.objectid import ObjectId
 
 
 lunch = Blueprint('lunch', 'lunch')
