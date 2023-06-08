@@ -75,10 +75,11 @@ def update_recipe(id):
         'description': payload['description']
     }
 
-    result = collection.update_one({'_id': ObjectId(id)}, {'$set': data})
+    collection.update_one({'_id': ObjectId(id)}, {'$set': data})
 
     updated_recipe = collection.find_one({'_id': ObjectId(id)})
     updated_recipe['_id'] = str(updated_recipe['_id'])
+    
     return jsonify(
         data=updated_recipe,
         message="Recipe has been successfully updated!",
@@ -90,7 +91,8 @@ def update_recipe(id):
 @breakfast.route('/<id>', methods=['DELETE'])
 def delete_recipe(id):
 
-    nums_of_rows_deleted = collection.delete_one({'_id': ObjectId(id)})
+    delete_query = collection.delete_one({'_id': ObjectId(id)})
+    nums_of_rows_deleted = delete_query.deleted_count
 
     return jsonify(
         data={},
