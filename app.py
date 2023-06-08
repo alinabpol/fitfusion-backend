@@ -1,4 +1,3 @@
-
 import os
 
 from flask import Flask, g
@@ -19,8 +18,6 @@ app = Flask(__name__)
 connection_url = os.getenv("ATLAS_URI")
 client = MongoClient(connection_url)
 db = client['fitfusion']
-
-
 
 
 
