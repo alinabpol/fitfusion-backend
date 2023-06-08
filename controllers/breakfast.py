@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models.nutrition_models import Breakfast
+from models.nutrition_models import Breakfast, breakfast_collection
 from bson import ObjectId
 
 
@@ -8,7 +8,7 @@ breakfast = Blueprint('breakfast', 'breakfast')
 # GET all route
 @breakfast.route('/', methods=['GET'])
 def nutrition_index():
-    result = Breakfast.get_all()
+    result = breakfast_collection.find()
     print(result)
     nutrition_dicts =  [
         # convert the ObjectId to a string
