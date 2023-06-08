@@ -1,22 +1,23 @@
 from flask import Blueprint, jsonify, request
-from models.breakfast_model import Breakfast
+from models.nutrition_models import Breakfast
 from bson import ObjectId
+
 
 breakfast = Blueprint('breakfast', 'breakfast')
 
 # GET all route
 @breakfast.route('/', methods=['GET'])
 def nutrition_index():
-    breakfasts = Breakfast.get_all()
-    print(breakfasts)
-    object_id_to_str = []
-    for breakfast in breakfasts:
-        breakfast['_id'] = str(breakfast['_id'])  
-        object_id_to_str.append(breakfast)
+    result = Breakfast.get_all()
+    print(result)
+    nutrition_dicts =  [
+        # convert the ObjectId to a string
+        {**breakfast, '_id': str(breakfast['_id'])} for breakfast in result
+    ]
 
     return jsonify({
-        'data': object_id_to_str,
-        'message': f"Successfully found {len(object_id_to_str)} recipes",
+        'data': nutrition_dicts,
+        'message': f"Successfully found {len(nutrition_dicts)} recipes",
         'status': 200
     }), 200
 
@@ -25,7 +26,7 @@ def nutrition_index():
 def get_one_recipe(id):
     breakfast = Breakfast.get_one(id)
     if breakfast:
-        # Convert the ObjectId to a string
+
         breakfast['_id'] = str(breakfast['_id'])
 
         return jsonify({
@@ -58,3 +59,29 @@ def create_recipe():
             'message': 'Failed to create a recipe',
             'status': 400
         }), 400
+    
+# PUT route
+@breakfast.route('/<id>', methods=['PUT'])
+def update_recipe(id):
+    payload = request.get_json()
+    print(payload)
+
+    updated_data = {
+        'title': payload['title'],
+        'img': payload['img'],
+        'time': int(payload['time']),
+        'ingredients': payload['ingredients'],
+        'description': payload['description']
+    }
+
+    result = Breakfast.update(id, updated_data)
+
+    updated_recipe = Breakfast.get_one(id)
+    updated_recipe['_id'] = str(updated_recipe['_id'])
+    return jsonify(
+        data=updated_recipe,
+        message="Recipe has been successfully updated!",
+        status=200
+        ), 200
+
+# DELETE route
