@@ -4,11 +4,12 @@ from bson import ObjectId
 
 
 breakfast = Blueprint('breakfast', 'breakfast')
+collection = breakfast_collection
 
 # GET all route
 @breakfast.route('/', methods=['GET'])
 def nutrition_index():
-    result = breakfast_collection.find()
+    result = collection.find()
     print(result)
     nutrition_dicts =  [
         # convert the ObjectId to a string
@@ -24,7 +25,7 @@ def nutrition_index():
 #GET route
 @breakfast.route('/<id>', methods=['GET'])
 def get_one_recipe(id):
-    breakfast = Breakfast.get_one(id)
+    breakfast = collection.find_one({'_id': ObjectId(id)})
     if breakfast:
 
         breakfast['_id'] = str(breakfast['_id'])
@@ -66,7 +67,7 @@ def update_recipe(id):
     payload = request.get_json()
     print(payload)
 
-    updated_data = {
+    data = {
         'title': payload['title'],
         'img': payload['img'],
         'time': int(payload['time']),
@@ -74,10 +75,11 @@ def update_recipe(id):
         'description': payload['description']
     }
 
-    result = Breakfast.update(id, updated_data)
+    collection.update_one({'_id': ObjectId(id)}, {'$set': data})
 
-    updated_recipe = Breakfast.get_one(id)
+    updated_recipe = collection.find_one({'_id': ObjectId(id)})
     updated_recipe['_id'] = str(updated_recipe['_id'])
+    
     return jsonify(
         data=updated_recipe,
         message="Recipe has been successfully updated!",
@@ -89,7 +91,8 @@ def update_recipe(id):
 @breakfast.route('/<id>', methods=['DELETE'])
 def delete_recipe(id):
 
-    nums_of_rows_deleted = Breakfast.delete(id)
+    delete_query = collection.delete_one({'_id': ObjectId(id)})
+    nums_of_rows_deleted = delete_query.deleted_count
 
     return jsonify(
         data={},

@@ -30,7 +30,7 @@ from controllers.dinner import dinner
 from controllers.snacks import snacks
 from controllers.smoothies import smoothies
 from controllers.desserts import desserts
-from controllers.analytics_form import analytics_form
+from controllers.analytics import analytics
 from controllers.workout import workout
 from controllers.chat import chat
 
@@ -55,7 +55,7 @@ CORS(dinner, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(smoothies, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(desserts, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(snacks, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(analytics_form, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(analytics, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(workout, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(chat, origins=['http://localhost:3000'], supports_credentials=True)
 
@@ -65,7 +65,7 @@ app.register_blueprint(dinner, url_prefix='/api/v1/dinner')
 app.register_blueprint(snacks, url_prefix='/api/v1/smoothies')
 app.register_blueprint(smoothies, url_prefix='/api/v1/snacks')
 app.register_blueprint(desserts, url_prefix='/api/v1/desserts')
-app.register_blueprint(analytics_form, url_prefix='/api/v1/form')
+app.register_blueprint(analytics, url_prefix='/api/v1/form')
 app.register_blueprint(workout, url_prefix='/api/v1/workout')
 app.register_blueprint(chat, url_prefix='/api/v1/chat')
 
