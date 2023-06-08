@@ -84,4 +84,15 @@ def update_recipe(id):
         status=200
         ), 200
 
+
 # DELETE route
+@breakfast.route('/<id>', methods=['DELETE'])
+def delete_recipe(id):
+
+    nums_of_rows_deleted = Breakfast.delete(id)
+
+    return jsonify(
+        data={},
+        message=f"Successfully deleted #{nums_of_rows_deleted} recipe with id {id}",
+        status=200
+    ), 200
