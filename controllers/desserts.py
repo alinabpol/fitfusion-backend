@@ -1,78 +1,101 @@
-import models.nutrition_models as nutrition_models
-
 from flask import Blueprint, jsonify, request
-from playhouse.shortcuts import model_to_dict
+from models.nutrition_models import Desserts, desserts_collection
+from bson import ObjectId
+
 
 desserts = Blueprint('desserts', 'desserts')
+collection = desserts_collection
 
 # GET all route
 @desserts.route('/', methods=['GET'])
 def nutrition_index():
-    result = nutrition_models.Desserts.select()
-    print('result of nutrition select query')
+    result = collection.find()
     print(result)
+    nutrition_dicts =  [
+        # convert the ObjectId to a string
+        {**desserts, '_id': str(desserts['_id'])} for desserts in result
+    ]
 
-    nutrition_dicts = [model_to_dict(recipe) for recipe in result]
-    
     return jsonify({
         'data': nutrition_dicts,
         'message': f"Successfully found {len(nutrition_dicts)} recipes",
         'status': 200
     }), 200
 
-# GET route
+#GET route
 @desserts.route('/<id>', methods=['GET'])
 def get_one_recipe(id):
-    recipe = nutrition_models.Desserts.get_by_id(id)
-    print(recipe)
-    return jsonify(
-        data=model_to_dict(recipe),
-        message="Success!!!",
-        status=200
-    ), 200
+    desserts = collection.find_one({'_id': ObjectId(id)})
+    if desserts:
 
+        desserts['_id'] = str(desserts['_id'])
+
+        return jsonify({
+            'data': desserts,
+            'message': 'Success!',
+            'status': 200
+        }), 200
+    else:
+        return jsonify({
+            'data': {},
+            'message': 'Recipe not found',
+            'status': 404
+        }), 404
 
 # POST route
 @desserts.route('/', methods=['POST'])
-
 def create_recipe():
     payload = request.get_json()
-    print(payload)
-    new_recipe = nutrition_models.Desserts.create(title=payload['title'], img=payload['img'], time=payload["time"], ingredients=payload["ingredients"], description=payload['description'])
-    print(new_recipe) # just prints the ID -- check sqlite3 to see the data 
-
-    nutrition_dict = model_to_dict(new_recipe)
-    return jsonify(
-        data=nutrition_dict,
-        message="Sucessfully created a recipe!",
-        status=201
-    ), 201
-
+    desserts = Desserts(**payload)
+    result = desserts.save()
+    if result:
+        return jsonify({
+            'data': desserts.__dict__,
+            'message': 'Successfully created a recipe!',
+            'status': 201
+        }), 201
+    else:
+        return jsonify({
+            'data': {},
+            'message': 'Failed to create a recipe',
+            'status': 400
+        }), 400
+    
 # PUT route
 @desserts.route('/<id>', methods=['PUT'])
 def update_recipe(id):
     payload = request.get_json()
     print(payload)
-    
-    nutrition_models.Desserts.update(**payload).where(nutrition_models.Desserts.id == id).execute()
 
+    data = {
+        'title': payload['title'],
+        'img': payload['img'],
+        'time': int(payload['time']),
+        'ingredients': payload['ingredients'],
+        'description': payload['description']
+    }
+
+    collection.update_one({'_id': ObjectId(id)}, {'$set': data})
+
+    updated_recipe = collection.find_one({'_id': ObjectId(id)})
+    updated_recipe['_id'] = str(updated_recipe['_id'])
+    
     return jsonify(
-        data=model_to_dict(nutrition_models.Desserts.get_by_id(id)),
+        data=updated_recipe,
         message="Recipe has been successfully updated!",
         status=200
-    ),200
+        ), 200
 
 
 # DELETE route
 @desserts.route('/<id>', methods=['DELETE'])
 def delete_recipe(id):
 
-    delete_query = nutrition_models.Desserts.delete().where(nutrition_models.Desserts.id == id)
-    nums_of_rows_deleted = delete_query.execute()
-    print(nums_of_rows_deleted)
+    delete_query = collection.delete_one({'_id': ObjectId(id)})
+    nums_of_rows_deleted = delete_query.deleted_count
 
     return jsonify(
         data={},
-        message=f"Successfully deleted {nums_of_rows_deleted} recipe with id {id}",
+        message=f"Successfully deleted #{nums_of_rows_deleted} recipe with id {id}",
         status=200
     ), 200
