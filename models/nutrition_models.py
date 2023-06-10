@@ -56,7 +56,7 @@ class Lunch:
             'ingredients': self.ingredients,
             'description': self.description
         }
-        result = breakfast_collection.insert_one(document)
+        result = lunch_collection.insert_one(document)
         return result.inserted_id
     
 
@@ -79,7 +79,7 @@ class Dinner:
             'ingredients': self.ingredients,
             'description': self.description
         }
-        result = breakfast_collection.insert_one(document)
+        result = dinner_collection.insert_one(document)
         return result.inserted_id
     
 
@@ -102,7 +102,7 @@ class Snacks:
             'ingredients': self.ingredients,
             'description': self.description
         }
-        result = breakfast_collection.insert_one(document)
+        result = snacks_collection.insert_one(document)
         return result.inserted_id
     
 
@@ -125,7 +125,7 @@ class Smoothies:
             'ingredients': self.ingredients,
             'description': self.description
         }
-        result = breakfast_collection.insert_one(document)
+        result = smoothies_collection.insert_one(document)
         return result.inserted_id
     
 
@@ -149,7 +149,7 @@ class Desserts:
             'ingredients': self.ingredients,
             'description': self.description
         }
-        result = breakfast_collection.insert_one(document)
+        result = desserts_collection.insert_one(document)
         return result.inserted_id
     
 
