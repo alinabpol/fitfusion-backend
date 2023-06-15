@@ -48,7 +48,7 @@ def get_one_recipe(id):
 @custom.route('/', methods=['POST'])
 def create_recipe():
     payload = request.get_json()
-    snacks = Custom(**payload)
+    custom = Custom(**payload)
     result = custom.save()
     if result:
         return jsonify({
@@ -62,6 +62,9 @@ def create_recipe():
             'message': 'Failed to create a recipe',
             'status': 400
         }), 400
+    
+
+
 # PUT route
 @custom.route('/<id>', methods=['PUT'])
 def update_recipe(id):

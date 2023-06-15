@@ -155,7 +155,7 @@ class Desserts:
     
 
 class Custom:
-    def __init__(self, title, img, time, ingredients, description, file):
+    def __init__(self, title, time, ingredients, description, file):
         self.title = str(title)
         self.time = int(time)
         self.ingredients = str(ingredients)
