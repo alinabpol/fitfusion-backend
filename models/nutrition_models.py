@@ -157,7 +157,6 @@ class Desserts:
 class Custom:
     def __init__(self, title, img, time, ingredients, description, file):
         self.title = str(title)
-        self.img = str(img)
         self.time = int(time)
         self.ingredients = str(ingredients)
         self.description = str(description)
@@ -167,7 +166,6 @@ class Custom:
     def save(self):
         document = {
             'title': self.title,
-            'img': self.img,
             'time': self.time,
             'ingredients': self.ingredients,
             'description': self.description,

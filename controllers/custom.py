@@ -70,7 +70,6 @@ def update_recipe(id):
 
     data = {
         'title': payload['title'],
-        'img': payload['img'],
         'time': int(payload['time']),
         'ingredients': payload['ingredients'],
         'description': payload['description'],
