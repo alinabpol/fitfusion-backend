@@ -1,13 +1,11 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, current_app
 from models.nutrition_models import Custom, custom_collection
 from bson.objectid import ObjectId
-from werkzeug.utils import secure_filename
-import os
+
 
 
 custom = Blueprint('custom', 'custom')
 collection = custom_collection
-
 
 
 # GET all route
@@ -47,7 +45,23 @@ def get_one_recipe(id):
         }), 404
 
 # POST route
-
+@custom.route('/', methods=['POST'])
+def create_recipe():
+    payload = request.get_json()
+    snacks = Custom(**payload)
+    result = custom.save()
+    if result:
+        return jsonify({
+            'data': custom.__dict__,
+            'message': 'Successfully created a recipe!',
+            'status': 201
+        }), 201
+    else:
+        return jsonify({
+            'data': {},
+            'message': 'Failed to create a recipe',
+            'status': 400
+        }), 400
 # PUT route
 @custom.route('/<id>', methods=['PUT'])
 def update_recipe(id):

@@ -161,6 +161,7 @@ class Custom:
         self.time = int(time)
         self.ingredients = str(ingredients)
         self.description = str(description)
+        self.file = str(file)
 
     # save data to database
     def save(self):
