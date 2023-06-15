@@ -30,6 +30,7 @@ from controllers.desserts import desserts
 from controllers.analytics import analytics
 from controllers.workout import workout
 from controllers.chat import chat
+from controllers.custom import custom
 
 app = Flask(__name__)
 
@@ -55,6 +56,7 @@ CORS(snacks, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supp
 CORS(analytics, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
 CORS(workout, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
 CORS(chat, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
+CORS(custom, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
 
 app.register_blueprint(breakfast, url_prefix='/api/v1/breakfast')
 app.register_blueprint(lunch, url_prefix='/api/v1/lunch')
@@ -65,6 +67,7 @@ app.register_blueprint(desserts, url_prefix='/api/v1/desserts')
 app.register_blueprint(analytics, url_prefix='/api/v1/form')
 app.register_blueprint(workout, url_prefix='/api/v1/workout')
 app.register_blueprint(chat, url_prefix='/api/v1/chat')
+app.register_blueprint(custom, url_prefix='/api/v1/custom')
 
 
 

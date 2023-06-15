@@ -14,6 +14,7 @@ dinner_collection = db['dinner']
 snacks_collection = db['snacks']
 smoothies_collection = db['smoothies']
 desserts_collection = db['desserts']
+custom_collection = db['custom']
 
 
 class Breakfast:
@@ -150,6 +151,28 @@ class Desserts:
             'description': self.description
         }
         result = desserts_collection.insert_one(document)
+        return result.inserted_id
+    
+
+class Custom:
+    def __init__(self, title, img, time, ingredients, description, file):
+        self.title = str(title)
+        self.img = str(img)
+        self.time = int(time)
+        self.ingredients = str(ingredients)
+        self.description = str(description)
+
+    # save data to database
+    def save(self):
+        document = {
+            'title': self.title,
+            'img': self.img,
+            'time': self.time,
+            'ingredients': self.ingredients,
+            'description': self.description,
+            'file': self.file
+        }
+        result = custom_collection.insert_one(document)
         return result.inserted_id
     
 
