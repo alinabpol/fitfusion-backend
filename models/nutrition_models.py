@@ -155,11 +155,17 @@ class Desserts:
     
 
 class Custom:
+    
+    TITLE_MAX_LENGTH = 100
+    INGREDIENTS_MAX_LENGTH = 500
+    DESCRIPTION_MAX_LENGTH = 1000
+
+
     def __init__(self, title, time, ingredients, description, file):
-        self.title = str(title)
+        self.title = str(title)[:self.TITLE_MAX_LENGTH]
         self.time = int(time)
-        self.ingredients = str(ingredients)
-        self.description = str(description)
+        self.ingredients = str(ingredients)[:self.INGREDIENTS_MAX_LENGTH]
+        self.description = str(description)[:self.DESCRIPTION_MAX_LENGTH]
         self.file = str(file)
 
     # save data to database

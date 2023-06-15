@@ -48,8 +48,16 @@ def get_one_recipe(id):
 @custom.route('/', methods=['POST'])
 def create_recipe():
     payload = request.get_json()
-    custom = Custom(**payload)
+
+    title = str(payload.get('title', ''))[:100]
+    time = int(payload.get('time', 0))
+    ingredients = str(payload.get('ingredients', ''))[:500]
+    description = str(payload.get('description', ''))[:1000]
+    file = str(payload.get('file', ''))
+
+    custom = Custom(title, time, ingredients, description, file)
     result = custom.save()
+
     if result:
         return jsonify({
             'data': custom.__dict__,
@@ -61,8 +69,7 @@ def create_recipe():
             'data': {},
             'message': 'Failed to create a recipe',
             'status': 400
-        }), 400
-    
+        }), 400 
 
 
 # PUT route
