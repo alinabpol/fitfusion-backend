@@ -47,16 +47,16 @@ def after_request(response):
     return response
 
 
-CORS(breakfast, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(lunch, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(dinner, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(smoothies, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(desserts, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(snacks, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(analytics, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(workout, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(chat, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
-CORS(custom, origins=['http://localhost:3000', 'http://192.168.0.12:3000'], supports_credentials=True)
+CORS(breakfast, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(lunch, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(dinner, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(smoothies, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(desserts, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(snacks, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(analytics, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(workout, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(chat, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
+CORS(custom, origins=['http://localhost:3000', 'http://192.168.0.12:3000', "https://fit-fusion-07dfed901ab9.herokuapp.com"], supports_credentials=True)
 
 app.register_blueprint(breakfast, url_prefix='/api/v1/breakfast')
 app.register_blueprint(lunch, url_prefix='/api/v1/lunch')
