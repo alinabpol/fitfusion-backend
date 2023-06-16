@@ -34,6 +34,8 @@ from controllers.custom import custom
 
 app = Flask(__name__)
 
+CORS(app)
+
 
 @app.before_request
 def before_request():
