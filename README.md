@@ -2,7 +2,29 @@
 
 Backend application for FitFusion application and API.
 
+## Installation
 
+Clone repository to your local machine and create a virtual environment. This can be done by running the following command:
+
+```
+python -m venv <your-env-name>
+```
+
+Activate the virtual environment
+```
+source <your-env-name>/bin/activate
+```
+
+Install the dependancies
+```
+pip install -r requirements.txt
+```
+
+Start application
+
+```
+python3 app.py
+```
 
 
 ## API Endpoints & HTTP Methods:
@@ -11,7 +33,7 @@ https://fitfusion.herokuapp.com/api/v1/workout - GET
 
 Reponse:
 
-```
+```JSON
 {
     "data": [
         {
@@ -32,7 +54,7 @@ https://fitfusion.herokuapp.com/api/v1/workout - POST
 
 Response:
 
-```
+```JSON
 {
     "data": {
         "activity": "Full Body Workout",
@@ -50,7 +72,7 @@ https://fitfusion.herokuapp.com/api/v1/workout/:id - PUT
 
 Response:
 
-```
+```JSON
 {
     "data": {
         "_id": "6490a343632b0a47bdb0c2f6",
@@ -69,7 +91,7 @@ https://fitfusion.herokuapp.com/api/v1/workout/:id - DELETE
 
 Response:
 
-```
+```JSON
 {
     "data": {},
     "message": "Successfully deleted #1 workout with id 6490a343632b0a47bdb0c2f6",
@@ -83,7 +105,7 @@ https://fitfusion.herokuapp.com/api/v1/chat - POST
 
 Response:
 
-```
+```JSON
 
 {
     "data": "Hello there! How can I assist you today?",
@@ -97,7 +119,7 @@ https://fitfusion.herokuapp.com/api/v1/breakfast - GET
 
 Response:
 
-```
+```JSON
 {
     "data": [
         {
@@ -119,7 +141,7 @@ https://fitfusion.herokuapp.com/api/v1/breakfast/:id - GET
 
 Response:
 
-```
+```JSON
 
 {
     "data": {
@@ -140,7 +162,7 @@ https://fitfusion.herokuapp.com/api/v1/breakfast/:id - PUT
 
 Response:
 
-```
+```JSON
 
 {
     "data": {
@@ -161,7 +183,7 @@ https://fitfusion.herokuapp.com/api/v1/breakfast - POST
 
 Response:
 
-```
+```JSON
 
 {
     "data": {
@@ -182,7 +204,7 @@ https://fitfusion.herokuapp.com/api/v1/breakfast/:id - DELETE
 
 Response: 
 
-```
+```JSON
 {
     "data": {},
     "message": "Successfully deleted #1 recipe with id 64909f6b632b0a47bdb0c2f5",
