@@ -1,35 +1,97 @@
-## Fitfusion Backend
+# Fitfusion Backend
 
 Backend application for FitFusion application and API.
 
 
+
+
 ## API Endpoints & HTTP Methods:
 
+https://fitfusion.herokuapp.com/api/v1/workout - GET
+
+Reponse:
+
+```
+{
+    "data": [
+        {
+            "_id": "648158fb3aa4dd146875c420",
+            "activity": "Full Body Workout",
+            "calories": 400,
+            "link": "https://www.youtube.com/embed/sM3c25BS1bY",
+            "time": 30
+        }
+    ],
+    "message": "Successfully found 6 workouts",
+    "status": 200
+}
+
+```
+
+https://fitfusion.herokuapp.com/api/v1/workout - POST
+
+Response:
+
+```
+{
+    "data": {
+        "activity": "Full Body Workout",
+        "calories": 400,
+        "link": "https://www.youtube.com/embed/sM3c25BS1bY",
+        "time": 30
+    },
+    "message": "Successfully created a workout!",
+    "status": 201
+}
+
+```
+
+https://fitfusion.herokuapp.com/api/v1/workout/:id - PUT
+
+Response:
+
+```
+{
+    "data": {
+        "_id": "6490a343632b0a47bdb0c2f6",
+        "activity": "Full Body Workout",
+        "calories": 1400,
+        "link": "https://www.youtube.com/embed/sM3c25BS1bY",
+        "time": 30
+    },
+    "message": "wWorkout has been successfully updated!",
+    "status": 200
+}
+
+```
+
+https://fitfusion.herokuapp.com/api/v1/workout/:id - DELETE
+
+Response:
+
+```
+{
+    "data": {},
+    "message": "Successfully deleted #1 workout with id 6490a343632b0a47bdb0c2f6",
+    "status": 200
+}
+
+```
 
 
+https://fitfusion.herokuapp.com/api/v1/chat - POST
 
+Response:
 
+```
 
+{
+    "data": "Hello there! How can I assist you today?",
+    "message": "Received a response!",
+    "status": 200
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 https://fitfusion.herokuapp.com/api/v1/breakfast - GET
 
@@ -129,14 +191,14 @@ Response:
 
 ```
 
-The following endpoints have identival responses and HTTP mathods available as the above.
+The following endpoints have identival responses and HTTP methods available as endpoint /breakfast.
 
-https://fitfusion.herokuapp.com/api/v1/lunch
-https://fitfusion.herokuapp.com/api/v1/dinner
-https://fitfusion.herokuapp.com/api/v1/smoothies
-https://fitfusion.herokuapp.com/api/v1/snacks
-https://fitfusion.herokuapp.com/api/v1/desserts
-https://fitfusion.herokuapp.com/api/v1/custom
+* https://fitfusion.herokuapp.com/api/v1/lunch
+* https://fitfusion.herokuapp.com/api/v1/dinner
+* https://fitfusion.herokuapp.com/api/v1/smoothies
+* https://fitfusion.herokuapp.com/api/v1/snacks
+* https://fitfusion.herokuapp.com/api/v1/desserts
+* https://fitfusion.herokuapp.com/api/v1/form
 
 
 
