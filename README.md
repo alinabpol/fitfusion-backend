@@ -44,7 +44,7 @@ Reponse:
             "time": 30
         }
     ],
-    "message": "Successfully found 6 workouts",
+    "message": "Successfully found 1 workouts",
     "status": 200
 }
 
