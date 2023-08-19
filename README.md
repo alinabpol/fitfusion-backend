@@ -213,7 +213,7 @@ Response:
 
 ```
 
-The following endpoints have identival responses and HTTP methods available as the endpoint ```/breakfast```.
+The following endpoints have identical responses and HTTP methods available as the endpoint ```/breakfast```.
 
 * https://fitfusion.herokuapp.com/api/v1/lunch
 * https://fitfusion.herokuapp.com/api/v1/dinner
